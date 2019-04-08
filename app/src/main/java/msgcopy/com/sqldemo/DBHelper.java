@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by liang on 2017/5/9.
  */
 
-public class DBHelper extends SQLiteOpenHelper{
+public class DBHelper extends SQLiteOpenHelper {
 
     private final static String DB_NAME = "User.db";
     private final static int DB_VERSION = 1;
@@ -21,10 +21,10 @@ public class DBHelper extends SQLiteOpenHelper{
         mContext = context;
     }
 
-    public static DBHelper getsInstance(Context context){
-        if (sInstance == null){
-            synchronized (DBHelper.class){
-                if (sInstance == null){
+    public static DBHelper getInstance(Context context) {
+        if (sInstance == null) {
+            synchronized (DBHelper.class) {
+                if (sInstance == null) {
                     sInstance = new DBHelper(context);
                 }
             }
@@ -35,10 +35,15 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE music_center (_id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR,songid VARCHAR,artist VARCHAR)");
+        createChatTable(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    private void createChatTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE user_list (_id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR,age INTEGER,sex INTEGER,info VARCHAR)");
     }
 }

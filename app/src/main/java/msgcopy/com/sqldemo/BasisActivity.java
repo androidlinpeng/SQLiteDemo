@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static msgcopy.com.sqldemo.DBHelper.getsInstance;
+import static msgcopy.com.sqldemo.DBHelper.getInstance;
 
 public class BasisActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -65,7 +65,7 @@ public class BasisActivity extends AppCompatActivity implements View.OnClickList
     private void queryData() {
         mList.clear();
         String input = etinput.getText().toString();
-        DBHelper dbHelper = getsInstance(this);
+        DBHelper dbHelper = getInstance(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("select * from music_center", null);
@@ -85,7 +85,7 @@ public class BasisActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateData() {
         String input = etinput.getText().toString();
-        DBHelper dbHelper = getsInstance(this);
+        DBHelper dbHelper = getInstance(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put("name","情郎");
@@ -95,14 +95,14 @@ public class BasisActivity extends AppCompatActivity implements View.OnClickList
 
     private void deleteData() {
         String input = etinput.getText().toString();
-        DBHelper dbHelper = getsInstance(this);
+        DBHelper dbHelper = getInstance(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         db.delete("music_center","name=?",new String[]{input});
         db.close();
     }
     private void insertData() {
         String input = etinput.getText().toString();
-        DBHelper dbHelper = getsInstance(this);
+        DBHelper dbHelper = getInstance(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name","我们的歌"+input);
