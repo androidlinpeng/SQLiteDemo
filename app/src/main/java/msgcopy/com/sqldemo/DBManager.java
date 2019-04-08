@@ -59,7 +59,6 @@ public class DBManager {
         DBHelper dbHelper = DBHelper.getInstance(mContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name", userInfo.getName());
         values.put("age", userInfo.getAge());
         values.put("sex", userInfo.getSex());
         values.put("info", userInfo.getInfo());

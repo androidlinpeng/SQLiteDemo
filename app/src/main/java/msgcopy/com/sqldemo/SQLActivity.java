@@ -52,27 +52,35 @@ public class SQLActivity extends AppCompatActivity implements View.OnClickListen
         String content = etContent.getText().toString().trim();
         switch (v.getId()) {
             case R.id.insert:
-                userInfo = new UserInfo.Builder()
-                        .name("ID:" + System.currentTimeMillis())
-                        .age((int) (Math.random() * 100))
-                        .sex(0)
-                        .info("名莲VIP")
-                        .build();
-                DBManager.getInstance().insertData(userInfo);
+                if (!TextUtils.isEmpty(content)) {
+                    userInfo = new UserInfo.Builder()
+                            .name(content)
+                            .age((int) (Math.random() * 100))
+                            .sex(0)
+                            .info("名莲VIP")
+                            .build();
+                    DBManager.getInstance().insertData(userInfo);
+                } else {
+                    userInfo = new UserInfo.Builder()
+                            .name((int) (Math.random() * 100) + "")
+                            .age((int) (Math.random() * 100))
+                            .sex(0)
+                            .info("名莲VIP")
+                            .build();
+                    DBManager.getInstance().insertData(userInfo);
+                }
                 break;
             case R.id.delete:
                 if (!TextUtils.isEmpty(content)) {
                     DBManager.getInstance().deleteData(content);
-                }else {
+                } else {
                     DBManager.getInstance().deleteAllData();
                 }
                 break;
             case R.id.update:
                 if (!TextUtils.isEmpty(content)) {
                     userInfo = new UserInfo.Builder()
-                            .name("ID:" + System.currentTimeMillis())
-                            .age((int) (Math.random() * 100))
-                            .sex(0)
+                            .sex(1)
                             .info("名莲VIP")
                             .build();
                     DBManager.getInstance().updateData(content, userInfo);
@@ -81,7 +89,7 @@ public class SQLActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.query:
                 if (!TextUtils.isEmpty(content)) {
                     adapter.update(DBManager.getInstance().queryData(content));
-                }else {
+                } else {
                     adapter.update(DBManager.getInstance().queryAllData());
                 }
                 break;
