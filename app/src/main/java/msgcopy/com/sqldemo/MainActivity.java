@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this,BasisActivity.class));
                 break;
             case R.id.button2:
-
+                startActivity(new Intent(MainActivity.this,SQLActivity.class));
                 break;
         }
     }
