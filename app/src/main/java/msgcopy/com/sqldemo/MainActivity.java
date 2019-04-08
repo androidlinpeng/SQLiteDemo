@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button2:
                 startActivity(new Intent(MainActivity.this,SQLActivity.class));
+                
                 break;
         }
     }
