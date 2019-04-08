@@ -14,7 +14,7 @@ public class DBManager {
 
     private Context mContext;
 
-    public static DBManager getInstance() {
+    public synchronized static DBManager getInstance() {
         if (mInstance == null) {
             synchronized (DBManager.class) {
                 if (mInstance == null) {

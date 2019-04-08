@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,13 @@ public class SQLActivity extends AppCompatActivity implements View.OnClickListen
         delete.setOnClickListener(this);
         update.setOnClickListener(this);
         query.setOnClickListener(this);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -62,13 +70,14 @@ public class SQLActivity extends AppCompatActivity implements View.OnClickListen
                     DBManager.getInstance().insertData(userInfo);
                 } else {
                     userInfo = new UserInfo.Builder()
-                            .name((int) (Math.random() * 100) + "")
+                            .name("ID:"+System.currentTimeMillis())
                             .age((int) (Math.random() * 100))
                             .sex(0)
                             .info("名莲VIP")
                             .build();
                     DBManager.getInstance().insertData(userInfo);
                 }
+                etContent.setText("");
                 break;
             case R.id.delete:
                 if (!TextUtils.isEmpty(content)) {
@@ -76,6 +85,7 @@ public class SQLActivity extends AppCompatActivity implements View.OnClickListen
                 } else {
                     DBManager.getInstance().deleteAllData();
                 }
+                etContent.setText("");
                 break;
             case R.id.update:
                 if (!TextUtils.isEmpty(content)) {
@@ -85,6 +95,7 @@ public class SQLActivity extends AppCompatActivity implements View.OnClickListen
                             .build();
                     DBManager.getInstance().updateData(content, userInfo);
                 }
+                etContent.setText("");
                 break;
             case R.id.query:
                 if (!TextUtils.isEmpty(content)) {
@@ -92,6 +103,7 @@ public class SQLActivity extends AppCompatActivity implements View.OnClickListen
                 } else {
                     adapter.update(DBManager.getInstance().queryAllData());
                 }
+                etContent.setText("");
                 break;
         }
     }
